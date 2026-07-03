@@ -959,11 +959,27 @@ select {
 .commerce-card,
 .more-card {
   height: 310px;
+  position: relative;
   background: #fff;
   border: 1px solid #e3dbd2;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 4px 13px rgba(19, 16, 13, .03);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
+}
+
+.commerce-card::before,
+.more-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 42%, rgba(255, 247, 232, .86) 100%),
+    radial-gradient(circle at 50% 0, rgba(212, 154, 52, .16), rgba(212, 154, 52, 0) 54%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
 }
 
 .commerce-card img {
@@ -971,9 +987,12 @@ select {
   height: 142px;
   display: block;
   object-fit: cover;
+  transition: transform .42s ease, filter .42s ease;
 }
 
 .commerce-card div {
+  position: relative;
+  z-index: 2;
   padding: 18px 16px 0;
 }
 
@@ -984,6 +1003,7 @@ select {
   font-weight: 800;
   line-height: 1.1;
   text-transform: uppercase;
+  transition: color .28s ease;
 }
 
 .commerce-card p {
@@ -1000,6 +1020,7 @@ select {
   font-weight: 500;
   line-height: 1.15;
   white-space: nowrap;
+  transition: color .28s ease;
 }
 
 .commerce-card strong span {
@@ -1009,6 +1030,8 @@ select {
 
 .commerce-card a,
 .more-card a {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1020,6 +1043,7 @@ select {
   font-size: 9.5px;
   font-weight: 800;
   text-transform: uppercase;
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease;
 }
 
 .more-card {
@@ -1028,6 +1052,8 @@ select {
 }
 
 .more-card svg {
+  position: relative;
+  z-index: 2;
   width: 54px;
   height: 54px;
   color: var(--gold);
@@ -1037,18 +1063,24 @@ select {
   stroke-linecap: round;
   stroke-linejoin: round;
   margin-bottom: 20px;
+  transition: transform .3s ease, color .3s ease, filter .3s ease;
 }
 
 .more-card h3 {
+  position: relative;
+  z-index: 2;
   margin: 0 0 16px;
   color: #151b25;
   font-size: 14px;
   font-weight: 800;
   line-height: 1.25;
   text-transform: uppercase;
+  transition: color .28s ease;
 }
 
 .more-card p {
+  position: relative;
+  z-index: 2;
   margin: 0;
   color: #292f38;
   font-size: 11px;
@@ -1061,6 +1093,55 @@ select {
   margin-top: 22px;
   color: #fff;
   background: linear-gradient(180deg, #cc8f2f, #b9791c);
+}
+
+.commerce-card:hover,
+.commerce-card:focus-within,
+.more-card:hover,
+.more-card:focus-within {
+  transform: translateY(-10px);
+  border-color: rgba(183, 123, 34, .78);
+  box-shadow: 0 20px 34px rgba(56, 36, 13, .16);
+  background-color: #fff;
+}
+
+.commerce-card:hover::before,
+.commerce-card:focus-within::before,
+.more-card:hover::before,
+.more-card:focus-within::before {
+  opacity: 1;
+}
+
+.commerce-card:hover img,
+.commerce-card:focus-within img {
+  filter: saturate(1.08) contrast(1.04);
+  transform: scale(1.055);
+}
+
+.commerce-card:hover h3,
+.commerce-card:focus-within h3,
+.commerce-card:hover strong,
+.commerce-card:focus-within strong,
+.more-card:hover h3,
+.more-card:focus-within h3 {
+  color: var(--gold-dark);
+}
+
+.commerce-card:hover a,
+.commerce-card:focus-within a,
+.more-card:hover a,
+.more-card:focus-within a {
+  color: #fff;
+  border-color: var(--gold-dark);
+  background: linear-gradient(180deg, #d49a34, #b77b22);
+  box-shadow: 0 8px 16px rgba(183, 123, 34, .22);
+}
+
+.more-card:hover svg,
+.more-card:focus-within svg {
+  color: var(--gold-dark);
+  filter: drop-shadow(0 0 9px rgba(212, 154, 52, .28));
+  transform: translateY(-4px) scale(1.08);
 }
 
 .urgency {
